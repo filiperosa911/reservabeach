@@ -1,0 +1,2258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIC FII Reserva Beach Yield — Oferta Primária</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Swiper CSS para o carrossel Galacticos -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --navy-mid: #132238;
+    --navy-light: #1A2F4A;
+    --ocean: #1B4F72;
+    --teal: #2E86AB;
+    --sand: #C9A96E;
+    --sand-light: #E8D5B0;
+    --white: #F5F0E8;
+    --white-pure: #FFFFFF;
+    --gray: #8A9BB0;
+    --gray-light: #B8C8D8;
+  }
+
+  /* ── LENIS SMOOTH SCROLL ── */
+  html.lenis {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  /* ── CURSOR CUSTOMIZADO (TAG DRAG) ── */
+  .drag-tag {
+    position: fixed;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-color: var(--sand);
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    pointer-events: none;
+    transform: scale(0);
+    z-index: 9999;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    will-change: transform;
+  }
+  .drag-tag span {
+    display: block;
+  }
+
+  /* ── SLIDE 2 — APRESENTAÇÃO DO EMPREENDIMENTO ── */
+  .slide-dim-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: #03070d; /* Navy-black luxuoso e escuro */
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+    will-change: opacity;
+  }
+  .slide-grid-presentation {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    will-change: grid-template-columns, gap;
+  }
+  .presentation-text-content {
+    position: relative;
+    z-index: 1; /* Fica sob o overlay para ser escurecido */
+    overflow: hidden;
+    will-change: opacity, transform;
+  }
+  .presentation-img-box {
+    position: relative;
+    z-index: 4; /* Acima do overlay para se destacar no escuro */
+    width: 100%;
+    height: 520px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(201, 169, 110, 0.25);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    margin: 0 auto;
+    will-change: width, height, transform, border-radius;
+  }
+  .presentation-img-box img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: opacity, transform;
+  }
+  .wave-caption {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: rgba(13,27,42,0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    padding: 12px 20px;
+    border-radius: 2px;
+    max-width: 320px;
+    z-index: 5;
+  }
+  .wave-caption-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--white-pure);
+    margin-bottom: 4px;
+  }
+  .wave-caption-desc {
+    font-size: 11px;
+    color: var(--gray-light);
+    line-height: 1.4;
+  }
+
+  /* ── SLIDE 3 — PARCERIA E LEGADO (RONALDO) ── */
+  .slide-grid-ronaldo {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .ronaldo-img-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.55);
+  }
+  .ronaldo-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .ronaldo-quote-block {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-style: italic;
+    color: var(--sand-light);
+    line-height: 1.45;
+    margin-bottom: 28px;
+    border-left: 2px solid var(--sand);
+    padding-left: 24px;
+  }
+
+  /* ── SLIDE 4 — GALACTICOS HOUSE (CARROSSEL SWIPER) ── */
+  .slide-galacticos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .galacticos-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--white-pure);
+    line-height: 1.5;
+    margin-bottom: 24px;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .swiper-container {
+    width: 100%;
+    padding: 20px 0 40px;
+    overflow: hidden;
+  }
+  .swiper-slide-custom {
+    width: 520px;
+    height: 340px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(201, 169, 110, 0.2);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    background: var(--navy-mid);
+    position: relative;
+    cursor: none; /* Cursor customizado assume o controle */
+  }
+  .swiper-slide-custom img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .slide-caption-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(0deg, rgba(13,27,42,0.95) 0%, rgba(13,27,42,0) 100%);
+    padding: 30px 24px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .slide-caption-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--white-pure);
+  }
+  .slide-caption-num {
+    font-size: 11px;
+    color: var(--sand);
+    letter-spacing: 2px;
+  }
+  .galacticos-architects {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    margin-top: 32px;
+    opacity: 0.65;
+  }
+  .architect-logo {
+    height: 24px;
+    filter: brightness(0) invert(1) opacity(0.8);
+    transition: filter 0.3s, opacity 0.3s;
+  }
+  .architect-logo:hover {
+    filter: none;
+    opacity: 1;
+  }
+
+  /* ── GLOBAL STYLE OVERRIDES FOR GSAP ── */
+  .slide .slide-inner {
+    opacity: 1; /* control entries purely via GSAP */
+  }
+  .animate {
+    opacity: 1; /* let GSAP handle initial state */
+  }
+
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVIGATION ── */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 48px;
+    background: rgba(13,27,42,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,169,110,0.2);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sand);
+  }
+  .nav-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .nav-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gray);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .nav-dot.active { background: var(--sand); transform: scale(1.4); }
+
+  /* ── SLIDES ── */
+  .slide {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 0 60px;
+  }
+
+  /* ── SLIDE 1 — CAPA ── */
+  .slide-cover {
+    background: var(--navy);
+    align-items: center;
+    text-align: center;
+  }
+  .cover-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: var(--navy);
+    transform: scale(1.1); /* escala inicial para o zoom-out cinematográfico do GSAP */
+  }
+  .cover-bg video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    opacity: 0.22; /* opacidade reduzida conforme solicitado */
+    z-index: 1;
+  }
+  .cover-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(13,27,42,0.3) 0%, rgba(13,27,42,0.85) 100%);
+    z-index: 2;
+  }
+  .cover-line-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--sand), transparent);
+  }
+  .cover-waves {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    opacity: 0.08;
+    overflow: hidden;
+  }
+  .cover-waves svg { width: 100%; height: 100%; }
+
+  .cover-content { position: relative; z-index: 2; max-width: 860px; padding: 0 48px; }
+  .cover-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .cover-label::before, .cover-label::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--sand);
+    opacity: 0.5;
+  }
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white-pure);
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+  }
+  .cover-title em {
+    font-style: italic;
+    color: var(--sand);
+  }
+  .cover-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--sand-light);
+    margin-bottom: 48px;
+    letter-spacing: 1px;
+  }
+  .cover-badges {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .badge {
+    padding: 8px 20px;
+    border: 1px solid rgba(201,169,110,0.35);
+    border-radius: 2px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sand-light);
+  }
+  .badge.primary {
+    background: rgba(201,169,110,0.12);
+    border-color: var(--sand);
+    color: var(--sand);
+  }
+  .cover-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--sand);
+    margin: 0 auto 32px;
+    opacity: 0.4;
+  }
+  .cover-meta {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+
+  /* ── SECTION DIVIDERS ── */
+  .section-divider {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 48px;
+    background: rgba(201,169,110,0.06);
+    border-top: 1px solid rgba(201,169,110,0.15);
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+  }
+  .section-divider span {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--sand);
+  }
+
+  /* ── SLIDE INNER ── */
+  .slide-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 64px;
+    width: 100%;
+  }
+  .slide-number {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sand);
+    opacity: 0.6;
+    margin-bottom: 16px;
+  }
+  .slide-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .slide-tag::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--sand);
+  }
+  .slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white-pure);
+    margin-bottom: 16px;
+  }
+  .slide-title em { font-style: italic; color: var(--sand); }
+  .slide-lead {
+    font-size: 15px;
+    color: var(--gray-light);
+    line-height: 1.7;
+    max-width: 640px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  /* ── GRID LAYOUTS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
+
+  /* ── CARDS ── */
+  .card {
+    background: rgba(26,47,74,0.5);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 4px;
+    padding: 28px;
+    position: relative;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--sand), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .card:hover::before { opacity: 1; }
+
+  .card-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 12px;
+  }
+  .card-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 400;
+    color: var(--white-pure);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .card-value.large {
+    font-size: 48px;
+  }
+  .card-desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(201,169,110,0.12), rgba(201,169,110,0.04));
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 4px;
+    padding: 32px 40px;
+    position: relative;
+  }
+  .highlight-box .value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--sand);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .highlight-box .label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+  }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 40px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .flow-item {
+    flex: 1;
+    min-width: 160px;
+    background: rgba(26,47,74,0.6);
+    border: 1px solid rgba(201,169,110,0.2);
+    padding: 24px 20px;
+    position: relative;
+    text-align: center;
+  }
+  .flow-item.highlight {
+    background: rgba(201,169,110,0.1);
+    border-color: var(--sand);
+  }
+  .flow-item.final {
+    background: linear-gradient(135deg, rgba(43,134,171,0.2), rgba(13,27,42,0.6));
+    border-color: var(--teal);
+  }
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    color: var(--sand);
+    font-size: 20px;
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+  .flow-item-tag {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 8px;
+  }
+  .flow-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--white-pure);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .flow-item-desc {
+    font-size: 11px;
+    color: var(--gray);
+    line-height: 1.4;
+  }
+
+  /* ── TABLE ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+  }
+  .data-table th {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sand);
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(201,169,110,0.3);
+    text-align: left;
+    font-weight: 400;
+  }
+  .data-table td {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--gray-light);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .data-table td.highlight-val {
+    color: var(--white-pure);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+  }
+  .data-table tr:hover td { background: rgba(201,169,110,0.04); }
+  .data-table .total td {
+    border-top: 1px solid rgba(201,169,110,0.3);
+    color: var(--sand);
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  /* ── CHART BARS ── */
+  .chart-container {
+    margin-top: 32px;
+  }
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    height: 200px;
+    border-bottom: 1px solid rgba(201,169,110,0.2);
+    padding-bottom: 0;
+  }
+  .chart-bar-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+  }
+  .chart-bar-value {
+    font-size: 11px;
+    color: var(--sand);
+    margin-bottom: 6px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+  }
+  .chart-bar {
+    width: 100%;
+    border-radius: 2px 2px 0 0;
+    min-height: 4px;
+    transition: opacity 0.3s;
+  }
+  .chart-bar:hover { opacity: 0.8; }
+  .chart-label {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+  .chart-legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--gray);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  /* ── VALUATION RESULT ── */
+  .valuation-result {
+    background: linear-gradient(135deg, rgba(27,79,114,0.3), rgba(13,27,42,0.8));
+    border: 1px solid rgba(43,134,171,0.4);
+    border-radius: 4px;
+    padding: 40px;
+    text-align: center;
+    margin-top: 32px;
+  }
+  .valuation-result .wacc-row {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-bottom: 32px;
+  }
+  .wacc-item .wacc-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    color: var(--teal);
+  }
+  .wacc-item .wacc-lbl {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+  .equity-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-weight: 300;
+    color: var(--white-pure);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .equity-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sand);
+  }
+
+  /* ── TIER CARDS ── */
+  .tier-card {
+    background: rgba(19,34,56,0.8);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 4px;
+    padding: 32px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .tier-card.premium {
+    border-color: var(--sand);
+    background: linear-gradient(160deg, rgba(201,169,110,0.1), rgba(19,34,56,0.9));
+  }
+  .tier-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .tier-card.basic::after { background: var(--gray); }
+  .tier-card.mid::after { background: var(--teal); }
+  .tier-card.premium::after { background: var(--sand); }
+  .tier-name {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 12px;
+  }
+  .tier-card.premium .tier-name { color: var(--sand); }
+  .tier-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    color: var(--white-pure);
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .tier-qty {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 20px;
+  }
+  .tier-features {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+  .tier-features li {
+    font-size: 12px;
+    color: var(--gray-light);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .tier-features li::before {
+    content: '—';
+    color: var(--sand);
+    opacity: 0.6;
+    flex-shrink: 0;
+    font-size: 10px;
+    margin-top: 2px;
+  }
+
+  /* ── STEP FLOW ── */
+  .steps {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .step {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--sand);
+    opacity: 0.3;
+    line-height: 1;
+    min-width: 48px;
+    text-align: right;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--white-pure);
+    margin-bottom: 8px;
+  }
+  .step-desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+  .step-meta {
+    margin-top: 8px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .step-badge {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--sand);
+    background: rgba(201,169,110,0.1);
+    border: 1px solid rgba(201,169,110,0.25);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  /* ── TWO COL ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .two-col.wide { grid-template-columns: 3fr 2fr; }
+  .two-col.wider { grid-template-columns: 2fr 1fr; }
+
+  /* ── DIVIDER LINE ── */
+  .h-line {
+    height: 1px;
+    background: linear-gradient(90deg, var(--sand), transparent);
+    opacity: 0.3;
+    margin: 40px 0;
+  }
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: flex;
+    gap: 0;
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .stat-cell {
+    flex: 1;
+    padding: 20px 24px;
+    border-right: 1px solid rgba(201,169,110,0.15);
+    text-align: center;
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-cell .val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--white-pure);
+    margin-bottom: 4px;
+  }
+  .stat-cell .lbl {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* ── DISCLAIMER ── */
+  .disclaimer {
+    background: rgba(13,27,42,0.8);
+    border-top: 1px solid rgba(201,169,110,0.1);
+    padding: 32px 64px;
+    font-size: 11px;
+    color: var(--gray);
+    line-height: 1.7;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── FOOTER ── */
+  .slide-footer {
+    max-width: 1100px;
+    margin: 48px auto 0;
+    padding: 20px 64px 0;
+    border-top: 1px solid rgba(201,169,110,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .slide-footer .strivo {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+  .slide-footer .pg {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--sand);
+    opacity: 0.4;
+  }
+  .slide-footer .conf {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate { animation: fadeUp 0.7s ease forwards; opacity: 0; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+  .delay-5 { animation-delay: 0.7s; }
+
+  /* ── COST TABLE MINI ── */
+  .mini-table {
+    width: 100%;
+    font-size: 13px;
+  }
+  .mini-table tr td {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--gray-light);
+  }
+  .mini-table tr td:last-child {
+    text-align: right;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--white-pure);
+  }
+  .mini-table tr.subtotal td {
+    color: var(--sand);
+    border-top: 1px solid rgba(201,169,110,0.2);
+    font-weight: 500;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .grid-2, .grid-3, .grid-4, .two-col { grid-template-columns: 1fr; }
+    .cover-title { font-size: 48px; }
+    .slide-inner { padding: 0 32px; }
+    .flow { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-logo">Reserva Beach Yield · Oferta Primária</div>
+  <div class="nav-dots">
+    <div class="nav-dot active" title="Capa"></div>
+    <div class="nav-dot" title="O Empreendimento"></div>
+    <div class="nav-dot" title="Parceria & Legado"></div>
+    <div class="nav-dot" title="Galacticos House"></div>
+    <div class="nav-dot" title="Tese Comercial"></div>
+    <div class="nav-dot" title="Estrutura de Fundos"></div>
+    <div class="nav-dot" title="Premissas & Vendas"></div>
+    <div class="nav-dot" title="Custos & Obra"></div>
+    <div class="nav-dot" title="Valuation"></div>
+    <div class="nav-dot" title="Fluxo & Projeções"></div>
+    <div class="nav-dot" title="Disclaimer"></div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SLIDE 1 — CAPA -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="slide slide-cover">
+  <div class="cover-bg">
+    <video autoplay loop muted playsinline id="bgVideo">
+      <source src="https://reservaclub.com.br/videos/video_site_1920x1080px_compressed.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="cover-line-top"></div>
+  <div class="cover-waves">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path id="wavePath1" d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z" fill="rgba(201,169,110,0.3)"/>
+      <path id="wavePath2" d="M0,80 C360,40 720,100 1080,60 C1260,40 1380,80 1440,80 L1440,120 L0,120 Z" fill="rgba(43,134,171,0.2)"/>
+    </svg>
+  </div>
+  <div class="cover-content">
+    <div class="cover-label animate delay-1">Oferta Primária · Coordenação XP Investimentos</div>
+    <h1 class="cover-title animate delay-2">FIC FII<br><em>Reserva Beach</em><br>Yield</h1>
+    <div class="cover-subtitle animate delay-3">Fundo de Investimento em Cotas</div>
+    <div class="cover-badges animate delay-4">
+      <div class="badge primary">Oferta Primária</div>
+      <div class="badge">Alphaville · SP</div>
+      <div class="badge">Alto Padrão</div>
+      <div class="badge">BR Soho</div>
+    </div>
+    <div class="cover-divider animate delay-5"></div>
+    <div class="cover-meta animate delay-5">Confidencial · Uso Restrito · Strivo Gestão de Recursos S.A.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SLIDE 2 — O EMPREENDIMENTO & SURFLOCH WAVE POOL -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section-divider"><span>O Empreendimento</span></div>
+
+<section class="slide" style="position: relative;">
+  <!-- Overlay para apagar as luzes -->
+  <div class="slide-dim-overlay"></div>
+
+  <div class="slide-inner slide-grid-presentation">
+    <!-- Coluna da Esquerda (Textos e Stats) -->
+    <div class="presentation-text-content">
+      <div class="slide-tag animate">O Complexo</div>
+      <h2 class="slide-title animate delay-1" style="font-size: 48px;">Reserva Beach Club<br><em>O Paraíso em Alphaville</em></h2>
+      <p class="slide-lead animate delay-2">Um projeto monumental de 120.062 m² que traz a experiência sofisticada da praia para o coração urbano de Alphaville. Mais do que um clube, um patrimônio sólido de lazer, bem-estar e convívio altamente exclusivo.</p>
+      
+      <div class="stat-row animate delay-3" style="margin-bottom: 24px;">
+        <div class="stat-cell">
+          <div class="val">120K m²</div>
+          <div class="lbl">Área Total</div>
+        </div>
+        <div class="stat-cell">
+          <div class="val">15K m²</div>
+          <div class="lbl">Mata Preservada</div>
+        </div>
+        <div class="stat-cell">
+          <div class="val">4.050</div>
+          <div class="lbl">Títulos Patrimoniais</div>
+        </div>
+      </div>
+
+      <div class="grid-2 animate delay-4">
+        <div class="card" style="padding: 20px;">
+          <div style="font-size: 20px; margin-bottom: 8px;">🌊</div>
+          <div class="card-label">Surf de Alta Performance</div>
+          <div class="card-desc">Piscina de ondas com tecnologia norte-americana <strong>SurfLoch Wavebender</strong>, gerando até 400 ondas perfeitas por hora para até 100 surfistas simultâneos.</div>
+        </div>
+        <div class="card" style="padding: 20px;">
+          <div style="font-size: 20px; margin-bottom: 8px;">🍽️</div>
+          <div class="card-label">Gastronomia & Lazer</div>
+          <div class="card-desc">Restaurantes de culinária internacional de frente para a praia de ondas, complexo de spas, wellness center e áreas sociais premium.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coluna da Direita (Caixa de Imagens com 4 Fotos) -->
+    <div class="presentation-img-box animate delay-3">
+      <img src="https://reservaclub.com.br/surfloch2.png" alt="Mulher Surfando - Reserva Beach" class="slide-img" style="z-index: 4;">
+      <img src="praia_privada.jpg" alt="Praia Privada 1" class="slide-img" style="z-index: 3; opacity: 0;">
+      <img src="praia_privada2.jpg" alt="Praia Privada 2" class="slide-img" style="z-index: 2; opacity: 0;">
+      <img src="surfshop.jpg" alt="Surf Shop" class="slide-img" style="z-index: 1; opacity: 0;">
+      
+      <div class="wave-caption" style="z-index: 5;">
+        <div class="wave-caption-title">Experiência SurfLoch™</div>
+        <div class="wave-caption-desc">Piscina de ondas de alta performance trazendo a praia de forma pioneira para Alphaville.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer" style="position: relative; z-index: 1;">
+    <div class="strivo">Strivo Gestão de Recursos</div>
+    <div class="pg">02</div>
+    <div class="conf">Confidencial</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SLIDE 3 — PARCERIA E LEGADO (RONALDO NAZÁRIO) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section-divider"><span>Parceria & Legado</span></div>
+
+<section class="slide">
+  <div class="slide-inner slide-grid-ronaldo">
+    <div class="ronaldo-img-container animate">
+      <img src="https://reservaclub.com.br/images/ronaldo-desktop.jpg" alt="Ronaldo Nazário - Embaixador Reserva Beach Club">
+    </div>
+
+    <div class="ronaldo-text-box">
+      <div class="slide-tag animate">Embaixador</div>
+      <h2 class="slide-title animate delay-1" style="font-size: 42px;">Ronaldo Nazário<br><em>Alinhamento de Excelência</em></h2>
+      
+      <div class="ronaldo-quote-block animate delay-2">
+        "A união com o Reserva Beach Club nasce de uma convergência natural de valores: excelência, bem-estar e a busca por experiências que elevam o nosso cotidiano."
+      </div>
+
+      <p class="slide-lead animate delay-3" style="font-size: 14px; margin-bottom: 24px;">Ronaldo Nazário se conecta estritamente a projetos que deixam legados reais. No Reserva, essa visão se materializa em uma união sólida, inovadora e capaz de redefinir os padrões de convivência, esporte e qualidade de vida na Grande São Paulo.</p>
+
+      <div class="card animate delay-4">
+        <div class="card-label">Selo Galácticos</div>
+        <div class="card-desc">A chancela e presença ativa do Ronaldo como sócio-fundador trazem um apelo comercial extraordinário e atraem um público investidor qualificado de alto patrimônio.</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <div class="strivo">Strivo Gestão de Recursos</div>
+    <div class="pg">03</div>
+    <div class="conf">Confidencial</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SLIDE 4 — GALACTICOS HOUSE (CIRCULO PRIVADO) -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section-divider"><span>Galacticos House</span></div>
+
+<section class="slide slide-galacticos">
+  <div class="slide-inner">
+    <div class="galacticos-header">
+      <div class="slide-tag animate">Exclusividade Extrema</div>
+      <h2 class="slide-title animate delay-1" style="font-size: 44px;">Galacticos House<br><em>Vencer é para poucos.</em></h2>
+    </div>
+
+    <div class="galacticos-desc animate delay-2">
+      Um círculo privado ultra-exclusivo dentro do Reserva Beach Club, planejado nos moldes dos mais prestigiados <em>members clubs</em> internacionais.
+    </div>
+
+    <!-- Swiper Carousel das Renders -->
+    <div class="swiper-container-wrap animate delay-3">
+      <!-- Tag customizada que segue o mouse -->
+      <div id="custom-cursor" class="drag-tag"><span>DRAG</span></div>
+      
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide swiper-slide-custom">
+            <img src="https://reservaclub.com.br/gh/banner-hero.webp" alt="Galacticos House Conceito">
+            <div class="slide-caption-overlay">
+              <div class="slide-caption-title">Galacticos House Club</div>
+              <div class="slide-caption-num">01 / 06</div>
+            </div>
+          </div>
+          <div class="swiper-slide swiper-slide-custom">
+            <img src="https://reservaclub.com.br/images/project/RBC_38_Restaurantes_3_EF.jpg" alt="Restaurantes Reserva Club">
+            <div class="slide-caption-overlay">
+              <div class="slide-caption-title">Alta Gastronomia Club</div>
+              <div class="slide-caption-num">02 / 06</div>
+            </div>
+          </div>
+          <div class="swiper-slide swiper-slide-custom">
+            <img src="https://reservaclub.com.br/gh/slide1.webp" alt="Complexo de Tênis">
+            <div class="slide-caption-overlay">
+              <div class="slide-caption-title">Quadras de Saibro Premium</div>
+              <div class="slide-caption-num">03 / 06</div>
+            </div>
+          </div>
+          <div class="swiper-slide swiper-slide-custom">
+            <img src="https://reservaclub.com.br/gh/slide2.webp" alt="Área Gourmet">
+            <div class="slide-caption-overlay">
+              <div class="slide-caption-title">Área de Convivência Privada</div>
+              <div class="slide-caption-num">04 / 06</div>
+            </div>
+          </div>
+          <div class="swiper-slide swiper-slide-custom">
+            <img src="https://reservaclub.com.br/gh/slide3.webp" alt="Fisioterapia e Recuperação">
+            <div class="slide-caption-overlay">
+              <div class="slide-caption-title">Espaço Wellness & Rehab</div>
+              <div class="slide-caption-num">05 / 06</div>
+            </div>
+          </div>
+          <div class="swiper-slide swiper-slide-custom">
+            <img src="https://reservaclub.com.br/gh/slide_introducao.webp" alt="Galacticos House Lazer">
+            <div class="slide-caption-overlay">
+              <div class="slide-caption-title">Victoribus, Gloria</div>
+              <div class="slide-caption-num">06 / 06</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grifes e Parcerias de Projeto -->
+    <div class="galacticos-partners animate delay-4">
+      <img src="https://reservaclub.com.br/logo-benedito.svg" alt="Benedito Abbud" class="architect-logo">
+      <img src="https://reservaclub.com.br/logo-leonice.svg" alt="Leonice Alves" class="architect-logo">
+      <img src="https://reservaclub.com.br/logo-rogerio-perez.svg" alt="Rogério Perez" class="architect-logo">
+    </div>
+  </div>
+  <div class="slide-footer">
+    <div class="strivo">Strivo Gestão de Recursos</div>
+    <div class="pg">04</div>
+    <div class="conf">Confidencial</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SLIDE 3 — TÍTULOS E VALORIZAÇÃO -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section-divider"><span>Tese Comercial</span></div>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="slide-tag animate">Títulos & Valorização</div>
+    <h2 class="slide-title animate delay-1">Três categorias.<br><em>Um ativo em valorização.</em></h2>
+    <p class="slide-lead animate delay-2">O clube opera com modelo de título associativo patrimonial — não é timeshare, não é imóvel. É um ativo com valor próprio, transferível, que acompanhou valorização de 50% em 18 meses desde o lançamento.</p>
+
+    <div class="grid-3 animate delay-3">
+      <div class="tier-card basic">
+        <div class="tier-name">Individual</div>
+        <div class="tier-price">R$ 335K</div>
+        <div class="tier-qty">~300 títulos · 2026/2027</div>
+        <ul class="tier-features">
+          <li>Acesso às áreas gerais do clube</li>
+          <li>Titular individual</li>
+          <li>Mensalidade R$ 2.000/mês</li>
+          <li>12 convidados/mês</li>
+        </ul>
+      </div>
+      <div class="tier-card mid">
+        <div class="tier-name">Patrimonial Regular</div>
+        <div class="tier-price">R$ 500K</div>
+        <div class="tier-qty">3.450 títulos · 2025–2029</div>
+        <ul class="tier-features">
+          <li>Titular + cônjuge + 3 filhos até 30 anos</li>
+          <li>4 agregados sênior (+70 anos)</li>
+          <li>12 convidados/mês</li>
+          <li>Mensalidade R$ 2.000/mês</li>
+          <li>Ativo patrimonial transferível</li>
+        </ul>
+      </div>
+      <div class="tier-card premium">
+        <div class="tier-name">Galácticos House · Super Premium</div>
+        <div class="tier-price">R$ 1,1M</div>
+        <div class="tier-qty">300 títulos · 2026–2028</div>
+        <ul class="tier-features">
+          <li>Acesso total + Complexo Ronaldo</li>
+          <li>Clube privado de tênis int'l</li>
+          <li>Fisioterapia e massagem pós-jogo</li>
+          <li>Todos os benefícios do Patrimonial</li>
+          <li>Comunidade alto padrão SP</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="h-line"></div>
+
+    <div class="two-col animate delay-4">
+      <div>
+        <div class="slide-tag">Histórico de Preços</div>
+        <div class="chart-container">
+          <div class="chart-bars">
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">R$ 430K</div>
+              <div class="chart-bar" style="height:25%;background:rgba(138,155,176,0.5);"></div>
+              <div class="chart-label">Lote 1</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">R$ 450K</div>
+              <div class="chart-bar" style="height:27%;background:rgba(138,155,176,0.5);"></div>
+              <div class="chart-label">Lote 2</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">R$ 569K</div>
+              <div class="chart-bar" style="height:35%;background:rgba(138,155,176,0.5);"></div>
+              <div class="chart-label">Lote 3</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">R$ 679K</div>
+              <div class="chart-bar" style="height:42%;background:rgba(138,155,176,0.5);"></div>
+              <div class="chart-label">Lote 4</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">R$ 550K</div>
+              <div class="chart-bar" style="height:33%;background:rgba(43,134,171,0.5);"></div>
+              <div class="chart-label">P. Lote 1</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">R$ 620K</div>
+              <div class="chart-bar" style="height:38%;background:rgba(43,134,171,0.5);"></div>
+              <div class="chart-label">P. Lote 2</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">R$ 734K</div>
+              <div class="chart-bar" style="height:45%;background:rgba(43,134,171,0.6);"></div>
+              <div class="chart-label">P. Lote 3</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">R$ 880K</div>
+              <div class="chart-bar" style="height:55%;background:rgba(201,169,110,0.6);"></div>
+              <div class="chart-label">P. Lote 4</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">R$ 1,1M</div>
+              <div class="chart-bar" style="height:100%;background:linear-gradient(180deg,var(--sand),rgba(201,169,110,0.5));"></div>
+              <div class="chart-label">P. Lote 5</div>
+            </div>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:rgba(138,155,176,0.6);"></div>Esgotado</div>
+            <div class="legend-item"><div class="legend-dot" style="background:rgba(43,134,171,0.6);"></div>Patrimonial</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--sand);"></div>Atual / Projetado</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="highlight-box" style="margin-bottom:20px;">
+          <div class="value">+50%</div>
+          <div class="label">Valorização em 18 meses</div>
+        </div>
+        <div class="card" style="margin-bottom:16px;">
+          <div class="card-label">Lotes Fundadores</div>
+          <div class="card-desc">R$ 430K → R$ 679K · 4 lotes esgotados</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Galácticos — Projeção Entrega</div>
+          <div class="card-desc">R$ 1.100K (2026) → R$ 1.775K (2028)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <div class="strivo">Strivo Gestão de Recursos</div>
+    <div class="pg">05</div>
+    <div class="conf">Confidencial</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SLIDE 4 — ESTRUTURA DE FUNDOS -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section-divider"><span>Engenharia Financeira</span></div>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="slide-tag animate">Estrutura Societária</div>
+    <h2 class="slide-title animate delay-1">Cinco camadas.<br><em>Uma oferta.</em></h2>
+    <p class="slide-lead animate delay-2">A reestruturação dos Fundos Avignon isola o ativo Reserva Beach em um FII próprio, viabilizando a oferta primária via FIC coordenada pela XP Investimentos.</p>
+
+    <div class="flow animate delay-3">
+      <div class="flow-item">
+        <div class="flow-item-tag">Origem</div>
+        <div class="flow-item-name">FIM Avignon</div>
+        <div class="flow-item-desc">Fundo Multimercado · fundo investidor origem</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="flow-item-tag">Etapa 1</div>
+        <div class="flow-item-name">FIP Avignon</div>
+        <div class="flow-item-desc">Fundo Participações · detém 18 terrenos · realiza cisão</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="flow-item-tag">Etapa 2 · SPE</div>
+        <div class="flow-item-name">SPE Reserva Beach</div>
+        <div class="flow-item-desc">Detém matrícula + contrato de construção</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item highlight">
+        <div class="flow-item-tag">Etapa 3 · FII Base</div>
+        <div class="flow-item-name">FII Reserva Beach</div>
+        <div class="flow-item-desc">Onde a obra acontece · desenvolvimento do empreendimento</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item final">
+        <div class="flow-item-tag">Oferta · FIC</div>
+        <div class="flow-item-name">FIC FII RB Yield</div>
+        <div class="flow-item-desc">Compra 100% das cotas do FII · capta via XP</div>
+      </div>
+      <div class="flow-arrow">←</div>
+      <div class="flow-item" style="background:rgba(43,134,171,0.08);border-color:rgba(43,134,171,0.4);">
+        <div class="flow-item-tag">Distribuição</div>
+        <div class="flow-item-name">XP Investimentos</div>
+        <div class="flow-item-desc">Coordenadora Líder · Oferta Primária · Mercado</div>
+      </div>
+    </div>
+
+    <div class="h-line"></div>
+
+    <div class="three-steps grid-3 animate delay-4">
+      <div class="card">
+        <div class="card-label">Etapa 1 · Transformação</div>
+        <div class="card-value" style="font-size:18px;">FIP → FIM Avignon</div>
+        <div class="card-desc">Conversão da natureza jurídica do fundo. Aprovação em assembleia de cotistas e arquivamento do regulamento na CVM.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Etapa 2 · Integralização</div>
+        <div class="card-value" style="font-size:18px;">FIM → FIP Avignon II</div>
+        <div class="card-desc">FIM Avignon aporta recursos no FIP Avignon II mediante subscrição de cotas. Constitui posição antes da reorganização final.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Etapa 3 · Cisão Patrimonial</div>
+        <div class="card-value" style="font-size:18px;">FIP II → FII RB</div>
+        <div class="card-desc">Cisão parcial com destino do ativo imobiliário ao FII Reserva Beach. Laudo de avaliação independente. Regime CVM/ANBIMA.</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <div class="strivo">Strivo Gestão de Recursos</div>
+    <div class="pg">06</div>
+    <div class="conf">Confidencial</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SLIDE 5 — PREMISSAS E RECEITA -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section-divider"><span>Análise Financeira · Prev Consulting</span></div>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="slide-tag animate">Premissas Econômicas</div>
+    <h2 class="slide-title animate delay-1">Pipeline de <em>receita.</em></h2>
+    <p class="slide-lead animate delay-2">Laudo de Avaliação Econômico-Financeira elaborado pela Prev Consulting (posição 31/12/2025). Metodologia FCD — horizonte 2025–2029. Administrador Fiduciário: BANVOX.</p>
+
+    <div class="two-col animate delay-3">
+      <div>
+        <div style="margin-bottom:24px;">
+          <div class="slide-tag" style="margin-bottom:12px;">Preço por Categoria (R$ mil)</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Categoria</th>
+                <th>2025</th>
+                <th>2026</th>
+                <th>2027</th>
+                <th>2028</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Regulares</td>
+                <td class="highlight-val">500</td>
+                <td class="highlight-val">675</td>
+                <td class="highlight-val">911</td>
+                <td class="highlight-val">1.276</td>
+              </tr>
+              <tr>
+                <td>Galácticos House</td>
+                <td>—</td>
+                <td class="highlight-val">1.100</td>
+                <td class="highlight-val">1.420</td>
+                <td class="highlight-val">1.775</td>
+              </tr>
+              <tr>
+                <td>Individuais</td>
+                <td>—</td>
+                <td class="highlight-val">335</td>
+                <td class="highlight-val">450</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="slide-tag" style="margin-bottom:12px;">Quantidade Vendida (unidades)</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Categoria</th>
+                <th>2025</th>
+                <th>2026</th>
+                <th>2027</th>
+                <th>2028</th>
+                <th>2029</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Regulares</td>
+                <td class="highlight-val">200</td>
+                <td class="highlight-val">500</td>
+                <td class="highlight-val">1.450</td>
+                <td class="highlight-val">1.200</td>
+                <td class="highlight-val">100</td>
+              </tr>
+              <tr>
+                <td>Galácticos</td>
+                <td>—</td>
+                <td class="highlight-val">100</td>
+                <td class="highlight-val">100</td>
+                <td class="highlight-val">100</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>Individuais</td>
+                <td>—</td>
+                <td class="highlight-val">150</td>
+                <td class="highlight-val">150</td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+              <tr class="total">
+                <td>Total</td>
+                <td>200</td>
+                <td>750</td>
+                <td>1.700</td>
+                <td>1.300</td>
+                <td>100</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="slide-tag" style="margin-bottom:16px;">Receita Bruta Projetada (R$ mi)</div>
+        <div class="chart-container">
+          <div class="chart-bars" style="height:240px;">
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">114</div>
+              <div class="chart-bar" style="height:6%;background:rgba(138,155,176,0.5);"></div>
+              <div class="chart-label">2025</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">536</div>
+              <div class="chart-bar" style="height:30%;background:rgba(43,134,171,0.5);"></div>
+              <div class="chart-label">2026</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">1.613</div>
+              <div class="chart-bar" style="height:90%;background:rgba(201,169,110,0.6);"></div>
+              <div class="chart-label">2027</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">1.785</div>
+              <div class="chart-bar" style="height:100%;background:linear-gradient(180deg,var(--sand),rgba(201,169,110,0.4));"></div>
+              <div class="chart-label">2028</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">181</div>
+              <div class="chart-bar" style="height:10%;background:rgba(138,155,176,0.4);"></div>
+              <div class="chart-label">2029</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:24px;">
+          <div class="card-label">Mensalidade (a partir de 2028)</div>
+          <div class="card-value" style="font-size:28px;">R$ 2.000 / mês</div>
+          <div class="card-desc">Por título vendido · corrigido pela inflação · 50 títulos honorários também contribuem</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <div class="strivo">Strivo Gestão de Recursos</div>
+    <div class="pg">07</div>
+    <div class="conf">Confidencial</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SLIDE 6 — CUSTOS E FLUXO DE CAIXA -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="slide-tag animate">Análise de Custos & Fluxo de Caixa</div>
+    <h2 class="slide-title animate delay-1">Obra e <em>resultado operacional.</em></h2>
+    <p class="slide-lead animate delay-2">Custos fornecidos pela administração com base nos projetos construtivos. Fluxo de caixa positivo desde 2025 — receita de vendas supera significativamente os custos de obra ao longo do ciclo.</p>
+
+    <div class="two-col animate delay-3">
+      <div>
+        <div class="slide-tag" style="margin-bottom:16px;">Custos & Despesas (R$ mil)</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>2025</th>
+              <th>2026</th>
+              <th>2027</th>
+              <th>2028</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Construção</td>
+              <td>9.346</td>
+              <td>90.342</td>
+              <td class="highlight-val">342.676</td>
+              <td class="highlight-val">180.684</td>
+            </tr>
+            <tr>
+              <td>Aquisição terreno</td>
+              <td>—</td>
+              <td>—</td>
+              <td>211.250</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Piscinas</td>
+              <td>—</td>
+              <td>46.375</td>
+              <td>46.375</td>
+              <td>92.750</td>
+            </tr>
+            <tr>
+              <td>Adm. da obra</td>
+              <td>935</td>
+              <td>9.034</td>
+              <td>34.268</td>
+              <td>18.068</td>
+            </tr>
+            <tr>
+              <td>Comercial + Mkt</td>
+              <td>8.000</td>
+              <td>41.175</td>
+              <td>124.095</td>
+              <td>143.772</td>
+            </tr>
+            <tr class="total">
+              <td>Total</td>
+              <td>18.830</td>
+              <td>192.378</td>
+              <td>766.020</td>
+              <td>435.720</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="slide-tag" style="margin-bottom:16px;">Fluxo de Caixa (R$ mil)</div>
+        <div class="chart-container">
+          <div class="chart-bars" style="height:200px;">
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">90,8M</div>
+              <div class="chart-bar" style="height:7%;background:rgba(43,134,171,0.5);"></div>
+              <div class="chart-label">2025</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">326,6M</div>
+              <div class="chart-bar" style="height:25%;background:rgba(43,134,171,0.55);"></div>
+              <div class="chart-label">2026</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">789,6M</div>
+              <div class="chart-bar" style="height:62%;background:rgba(201,169,110,0.6);"></div>
+              <div class="chart-label">2027</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">1.277B</div>
+              <div class="chart-bar" style="height:100%;background:linear-gradient(180deg,var(--sand),rgba(201,169,110,0.4));"></div>
+              <div class="chart-label">2028</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">159,7M</div>
+              <div class="chart-bar" style="height:12%;background:rgba(138,155,176,0.4);"></div>
+              <div class="chart-label">2029</div>
+            </div>
+          </div>
+        </div>
+        <div class="h-line" style="margin: 24px 0;"></div>
+        <div class="stat-row">
+          <div class="stat-cell">
+            <div class="val">R$ 2,64B</div>
+            <div class="lbl">Rec. Bruta Total</div>
+          </div>
+          <div class="stat-cell">
+            <div class="val">R$ 1,41B</div>
+            <div class="lbl">Custos Totais</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <div class="strivo">Strivo Gestão de Recursos</div>
+    <div class="pg">08</div>
+    <div class="conf">Confidencial</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SLIDE 7 — VALUATION -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section-divider"><span>Valuation & Retorno</span></div>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="slide-tag animate">Avaliação Econômico-Financeira</div>
+    <h2 class="slide-title animate delay-1">O valor do <em>ativo.</em></h2>
+    <p class="slide-lead animate delay-2">Avaliação independente pela Prev Consulting, metodologia Fluxo de Caixa Descontado (FCD). Horizonte 2025–2029. Empresas comparáveis: JHSF, Multiplan, Cyrela, Simon Property Group.</p>
+
+    <div class="valuation-result animate delay-3">
+      <div class="wacc-row">
+        <div class="wacc-item">
+          <div class="wacc-val" data-target-wacc="13.52">0,00%</div>
+          <div class="wacc-lbl">WACC</div>
+        </div>
+        <div class="wacc-item">
+          <div class="wacc-val" data-target-capm="15.87">0,00%</div>
+          <div class="wacc-lbl">CAPM (Ke)</div>
+        </div>
+        <div class="wacc-item">
+          <div class="wacc-val">R$ 0</div>
+          <div class="wacc-lbl">Dívida Líquida</div>
+        </div>
+        <div class="wacc-item">
+          <div class="wacc-val">2025–2029</div>
+          <div class="wacc-lbl">Horizonte FCD</div>
+        </div>
+      </div>
+      <div class="equity-value" data-target-equity="1.727">R$ 0,000 bi</div>
+      <div class="equity-label">Valor do Equity · Reserva Beach Club</div>
+    </div>
+
+    <div class="h-line"></div>
+
+    <div class="grid-3 animate delay-4">
+      <div class="card">
+        <div class="card-label">Taxa de Desconto</div>
+        <div class="card-value">WACC 13,52%</div>
+        <div class="card-desc">Beta desalavancado 0,93 · prêmio de risco específico 1,24% · diferencial de inflação 1,19%</div>
+      </div>
+      <div class="card">
+        <div class="card-label">VPL do Período</div>
+        <div class="card-value">R$ 1,727 bi</div>
+        <div class="card-desc">Fluxos de caixa descontados de 2025 a 2029. Sem dívida líquida. Valor do equity = valor do FII base.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Avaliador</div>
+        <div class="card-value" style="font-size:22px;">Prev Consulting</div>
+        <div class="card-desc">Gustav Gorski · CVM registrado · posição 31/12/2025 · solicitante BANVOX Adm. Fiduciária</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <div class="strivo">Strivo Gestão de Recursos</div>
+    <div class="pg">09</div>
+    <div class="conf">Confidencial</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SLIDE 8 — RECEITA LÍQUIDA -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="slide-tag animate">Receita Líquida & Projeção Completa</div>
+    <h2 class="slide-title animate delay-1">Projeção de <em>receita líquida.</em></h2>
+
+    <div class="two-col animate delay-2">
+      <div>
+        <div class="slide-tag" style="margin-bottom:16px;">Receita Líquida (R$ mil)</div>
+        <div class="chart-container">
+          <div class="chart-bars">
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">109,7M</div>
+              <div class="chart-bar" style="height:6%;background:rgba(43,134,171,0.4);"></div>
+              <div class="chart-label">2025</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">514,1M</div>
+              <div class="chart-bar" style="height:30%;background:rgba(43,134,171,0.5);"></div>
+              <div class="chart-label">2026</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">1.549M</div>
+              <div class="chart-bar" style="height:90%;background:rgba(201,169,110,0.55);"></div>
+              <div class="chart-label">2027</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">1.713M</div>
+              <div class="chart-bar" style="height:100%;background:linear-gradient(180deg,var(--sand),rgba(201,169,110,0.4));"></div>
+              <div class="chart-label">2028</div>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar-value">173,8M</div>
+              <div class="chart-bar" style="height:10%;background:rgba(138,155,176,0.4);"></div>
+              <div class="chart-label">2029</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="slide-tag" style="margin-bottom:16px;">DRE Resumido — Fluxo de Caixa (R$ mil)</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>2026</th>
+              <th>2027</th>
+              <th>2028</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Receita Bruta</td>
+              <td>535.521</td>
+              <td class="highlight-val">1.613.375</td>
+              <td class="highlight-val">1.784.805</td>
+            </tr>
+            <tr>
+              <td>(–) Deduções</td>
+              <td>(21.421)</td>
+              <td>(64.535)</td>
+              <td>(71.392)</td>
+            </tr>
+            <tr>
+              <td>Receita Líquida</td>
+              <td>514.100</td>
+              <td class="highlight-val">1.548.840</td>
+              <td class="highlight-val">1.713.413</td>
+            </tr>
+            <tr>
+              <td>(–) Custos Op.</td>
+              <td>(146.328)</td>
+              <td>(635.175)</td>
+              <td>(291.948)</td>
+            </tr>
+            <tr>
+              <td>(–) Custos Com.</td>
+              <td>(41.175)</td>
+              <td>(124.095)</td>
+              <td>(143.772)</td>
+            </tr>
+            <tr class="total">
+              <td>Fluxo de Caixa</td>
+              <td>326.597</td>
+              <td class="highlight-val">789.570</td>
+              <td class="highlight-val">1.277.693</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="highlight-box" style="margin-top:20px;">
+          <div class="value" style="font-size:40px;">R$ 2,643 bi</div>
+          <div class="label">Receita Bruta Total Projetada (2025–2029)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <div class="strivo">Strivo Gestão de Recursos</div>
+    <div class="pg">10</div>
+    <div class="conf">Confidencial</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SLIDE 9 — DISCLAIMER -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section-divider"><span>Disclaimer</span></div>
+
+<section class="slide" style="min-height:auto;padding:60px 0;">
+  <div class="slide-inner">
+    <div class="slide-tag animate">Aviso Legal</div>
+    <h2 class="slide-title animate delay-1" style="font-size:36px;">Informações <em>importantes.</em></h2>
+    <div class="disclaimer animate delay-2" style="padding:0;max-width:100%;margin-top:24px;">
+      <p style="margin-bottom:12px;">Este material é de caráter <strong style="color:var(--sand);">exclusivamente informativo</strong> e foi elaborado pela <strong>Strivo Gestão de Recursos S.A.</strong> com base em informações fornecidas pela administração do empreendimento Reserva Beach Club (BR Soho Participações S.A.) e no Laudo de Avaliação Econômico-Financeira elaborado pela <strong>Prev Consulting</strong> (posição 31/12/2025). Administrador Fiduciário: <strong>BANVOX Administração Fiduciária</strong>.</p>
+      <p style="margin-bottom:12px;">As estimativas e projeções envolvem julgamentos e análises subjetivas que podem não se concretizar. Os resultados reais poderão ser diferentes das projeções em função de condições econômicas, políticas de governo ou gestão operacional.</p>
+      <p style="margin-bottom:12px;">Este material é de uso restrito e não poderá ser publicado, circulado ou reproduzido sem aprovação prévia e por escrito da Strivo Gestão de Recursos S.A. O conteúdo não constitui oferta, solicitação ou recomendação de compra ou venda de valores mobiliários.</p>
+      <p>A oferta primária está sujeita a aprovação regulatória e ao cumprimento de todas as exigências da CVM/ANBIMA. Informações sobre a estrutura dos fundos foram baseadas no documento de reestruturação Fundos Avignon (Strivo, 2026).</p>
+    </div>
+    <div style="margin-top:40px;display:flex;gap:40px;flex-wrap:wrap;" class="animate delay-3">
+      <div>
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sand);margin-bottom:8px;">Gestora</div>
+        <div style="font-size:14px;color:var(--gray-light);">Strivo Gestão de Recursos S.A.<br><span style="color:var(--gray);font-size:12px;">juridico@strivo.com.br · (51) 99711-9495</span></div>
+      </div>
+      <div>
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sand);margin-bottom:8px;">Avaliador</div>
+        <div style="font-size:14px;color:var(--gray-light);">Prev Consulting — Gustav Gorski<br><span style="color:var(--gray);font-size:12px;">prevconsulting.com · (51) 99245-9206</span></div>
+      </div>
+      <div>
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sand);margin-bottom:8px;">Administrador Fiduciário</div>
+        <div style="font-size:14px;color:var(--gray-light);">BANVOX Administração Fiduciária<br><span style="color:var(--gray);font-size:12px;">São Paulo – SP</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bibliotecas CDN de Animação -->
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  // Registrando o plugin de rolagem do GSAP
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ── 1. INICIALIZAÇÃO DO LENIS SMOOTH SCROLL ──
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing elástico suave
+    smoothWheel: true
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  // Vinculando o Lenis ao ScrollTrigger
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+
+  // ── 2. SINCRONIZAÇÃO E NAVEGAÇÃO DOS DOTS DA NAV ──
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.nav-dot');
+
+  slides.forEach((slide, idx) => {
+    ScrollTrigger.create({
+      trigger: slide,
+      start: "top 50%",
+      end: "bottom 50%",
+      onToggle: (self) => {
+        if (self.isActive) {
+          dots.forEach(d => d.classList.remove('active'));
+          if (dots[idx]) dots[idx].classList.add('active');
+        }
+      }
+    });
+  });
+
+  // Rolagem suave ao clicar nos dots
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      const targetSlide = slides[idx];
+      if (targetSlide) {
+        lenis.scrollTo(targetSlide);
+      }
+    });
+  });
+
+  // ── 3. TIMELINE DE ENTRADA DO SLIDE 1 (CAPA) ──
+  window.addEventListener('DOMContentLoaded', () => {
+    // Configura o desenho inicial das ondas (invisíveis por padrão)
+    gsap.set("#wavePath1, #wavePath2", {
+      strokeDasharray: 1200,
+      strokeDashoffset: 1200,
+      stroke: "rgba(201,169,110,0.5)",
+      strokeWidth: 1.5
+    });
+
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+    tl.to(".cover-bg", { scale: 1.0, duration: 2.4, ease: "power2.out" })
+      .fromTo(".cover-label", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, "-=1.8")
+      .fromTo(".cover-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.0 }, "-=1.5")
+      .fromTo(".cover-subtitle", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8 }, "-=1.2")
+      .fromTo(".cover-badges .badge", { opacity: 0, y: 15 }, { opacity: 1, y: 0, stagger: 0.1, duration: 0.8 }, "-=1.0")
+      .fromTo(".cover-divider, .cover-meta", { opacity: 0 }, { opacity: 0.6, duration: 1.0 }, "-=0.7")
+      .to("#wavePath1, #wavePath2", { strokeDashoffset: 0, duration: 2.2, ease: "power2.inOut" }, "-=2.0");
+  });
+
+  // Ondas líquidas da capa com flutuação contínua e orgânica
+  gsap.to("#wavePath1", {
+    y: -8,
+    duration: 5,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+  gsap.to("#wavePath2", {
+    y: 8,
+    x: -12,
+    duration: 6,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+
+  // ── 4. ANIMAÇÕES DE SCROLL PARA OS SLIDES SUBSEQUENTES ──
+  slides.forEach((slide, index) => {
+    if (index === 0) return; // Capa já tem sua própria timeline de entrada
+
+    // Animação padrão para elementos com a classe '.animate'
+    const animElements = slide.querySelectorAll('.animate');
+    if (animElements.length > 0) {
+      gsap.fromTo(animElements, 
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: slide,
+            start: "top 75%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+    }
+
+    // Animação Cinematográfica Avançada do Slide 2 (Complexo)
+    if (index === 1) {
+      const images = slide.querySelectorAll('.presentation-img-box img.slide-img');
+      const captionTitle = slide.querySelector('.wave-caption-title');
+      const captionDesc = slide.querySelector('.wave-caption-desc');
+      const slideInner = slide.querySelector('.slide-inner');
+      const textContent = slide.querySelector('.presentation-text-content');
+      const dimOverlay = slide.querySelector('.slide-dim-overlay');
+      const footer = slide.querySelector('.slide-footer');
+
+      // Timeline mestre acionada pelo Scroll
+      const slide2Tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: slide,
+          start: "top top",      // Fixa quando o topo atinge o topo do viewport
+          end: "+=380%",         // Proporciona rolagem profunda e confortável para as 4 trocas
+          scrub: true,           // Sincroniza diretamente com o scroll físico
+          pin: true,             // Mantém a tela fixada
+          anticipatePin: 1
+        }
+      });
+
+      // Animação contínua e suave de zoom lento em todas as imagens ao mesmo tempo
+      slide2Tl.fromTo(images, 
+        { scale: 1.15 }, 
+        { scale: 1.0, ease: "none", duration: 4.0 }, 
+        0
+      );
+
+      // --- FASE 1: Apagar as Luzes e Expandir a Caixa de Imagem (Scroll: 0.0 -> 1.0) ---
+      slide2Tl.to(dimOverlay, { opacity: 0.92, duration: 1.0 }, 0)
+              .to(textContent, { opacity: 0, y: -20, pointerEvents: "none", duration: 0.8 }, 0)
+              .to(footer, { opacity: 0, duration: 0.8 }, 0)
+              .to(".nav", { opacity: 0, pointerEvents: "none", duration: 0.8 }, 0) // Esconde menu superior
+              .to(slideInner, { maxWidth: "100%", width: "100%", padding: 0, duration: 1.0 }, 0)
+              .to(".slide-grid-presentation", { gridTemplateColumns: "0% 100%", gap: 0, duration: 1.0 }, 0)
+              .to(".presentation-img-box", { 
+                width: "70vw", 
+                height: "70vh", 
+                borderRadius: "12px", 
+                border: "1px solid rgba(201, 169, 110, 0.4)",
+                boxShadow: "0 25px 60px rgba(0,0,0,0.8)",
+                duration: 1.0 
+              }, 0);
+
+      // --- FASE 2: Transição da Imagem 1 para a Imagem 2 (Scroll: 1.0 -> 2.0) ---
+      slide2Tl.to(images[0], { opacity: 0, duration: 1.0 }, 1.0)
+              .to(images[1], { opacity: 1, duration: 1.0 }, 1.0)
+              .to(captionTitle, { 
+                duration: 0.1,
+                onStart: () => {
+                  captionTitle.innerHTML = "Praia Privada e Exclusividade";
+                  captionDesc.innerHTML = "Um refúgio de areia clara e águas cristalinas integrado a um ecossistema sofisticado.";
+                },
+                onReverseComplete: () => {
+                  captionTitle.innerHTML = "Experiência SurfLoch™";
+                  captionDesc.innerHTML = "Piscina de ondas de alta performance trazendo a praia de forma pioneira para Alphaville.";
+                }
+              }, 1.4);
+
+      // --- FASE 3: Transição da Imagem 2 para a Imagem 3 (Scroll: 2.0 -> 3.0) ---
+      slide2Tl.to(images[1], { opacity: 0, duration: 1.0 }, 2.0)
+              .to(images[2], { opacity: 1, duration: 1.0 }, 2.0)
+              .to(captionTitle, { 
+                duration: 0.1,
+                onStart: () => {
+                  captionTitle.innerHTML = "Complexo Wellness & Social";
+                  captionDesc.innerHTML = "Infraestrutura de ponta com quadras esportivas, spas, bem-estar e convivência premium.";
+                },
+                onReverseComplete: () => {
+                  captionTitle.innerHTML = "Praia Privada e Exclusividade";
+                  captionDesc.innerHTML = "Um refúgio de areia clara e águas cristalinas integrado a um ecossistema sofisticado.";
+                }
+              }, 2.4);
+
+      // --- FASE 4: Transição da Imagem 3 para a Imagem 4 (Scroll: 3.0 -> 4.0) ---
+      slide2Tl.to(images[2], { opacity: 0, duration: 1.0 }, 3.0)
+              .to(images[3], { opacity: 1, duration: 1.0 }, 3.0)
+              .to(captionTitle, { 
+                duration: 0.1,
+                onStart: () => {
+                  captionTitle.innerHTML = "Lifestyle & Surf Shop";
+                  captionDesc.innerHTML = "A essência da cultura do surf e conveniências refinadas dentro de um ecossistema único.";
+                },
+                onReverseComplete: () => {
+                  captionTitle.innerHTML = "Complexo Wellness & Social";
+                  captionDesc.innerHTML = "Infraestrutura de ponta com quadras esportivas, spas, bem-estar e convivência premium.";
+                }
+              }, 3.4);
+
+      // --- FASE 5: Reaparecer o Menu Superior no Final do Slide 2 ---
+      slide2Tl.to(".nav", { opacity: 1, pointerEvents: "auto", duration: 0.8 }, 3.2);
+    }
+
+    // Efeito Clip-path na imagem do Ronaldo (Slide 3)
+    if (index === 2) {
+      gsap.fromTo(".ronaldo-img-container", 
+        { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" },
+        {
+          clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0 100%)",
+          duration: 1.6,
+          ease: "power4.inOut",
+          scrollTrigger: {
+            trigger: ".ronaldo-img-container",
+            start: "top 80%"
+          }
+        }
+      );
+    }
+  });
+
+  // ── 5. CARROSSEL SWIPER & CURSOR PERSONALIZADO (SLIDE 4) ──
+  const swiper = new Swiper('.mySwiper', {
+    slidesPerView: 'auto',
+    centeredSlides: true,
+    spaceBetween: 30,
+    grabCursor: false,
+    speed: 800,
+    loop: true,
+    keyboard: {
+      enabled: true,
+    },
+  });
+
+  // Configurações do Cursor customizado que persegue o mouse
+  const dragTag = document.getElementById('custom-cursor');
+  const swiperWrap = document.querySelector('.swiper-container-wrap');
+
+  let mouseX = 0, mouseY = 0;
+  let tagX = 0, tagY = 0;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  // Animação elástica do drag-tag perseguindo as coordenadas x/y do mouse
+  gsap.ticker.add(() => {
+    const dt = 1.0 - Math.pow(1.0 - 0.15, gsap.ticker.deltaRatio());
+    tagX += (mouseX - tagX) * dt;
+    tagY += (mouseY - tagY) * dt;
+
+    gsap.set(dragTag, {
+      x: tagX - 36,
+      y: tagY - 36
+    });
+  });
+
+  swiperWrap.addEventListener('mouseenter', () => {
+    gsap.to(dragTag, { scale: 1, duration: 0.3, ease: "power2.out" });
+  });
+
+  swiperWrap.addEventListener('mouseleave', () => {
+    gsap.to(dragTag, { scale: 0, duration: 0.3, ease: "power2.out" });
+  });
+
+  // Facilita avançar os slides com cliques nas metades esquerda/direita do carrossel
+  swiperWrap.addEventListener('click', (e) => {
+    if (!e.target.closest('a') && !e.target.closest('button')) {
+      if (e.clientX < window.innerWidth / 2) {
+        swiper.slidePrev();
+      } else {
+        swiper.slideNext();
+      }
+    }
+  });
+
+  // ── 6. CONTADORES NUMÉRICOS PROGRESSIVOS (SLIDE 9 — VALUATION) ──
+  ScrollTrigger.create({
+    trigger: ".valuation-result",
+    start: "top 75%",
+    onEnter: () => {
+      // 1. Contador WACC
+      gsap.fromTo("[data-target-wacc]", 
+        { textContent: 0 }, 
+        { 
+          textContent: 13.52,
+          duration: 2.0,
+          ease: "power2.out",
+          snap: { textContent: 0.01 },
+          onUpdate: function() {
+            const val = parseFloat(this.targets()[0].textContent).toFixed(2).replace('.', ',');
+            this.targets()[0].innerHTML = `${val}%`;
+          }
+        }
+      );
+
+      // 2. Contador CAPM (Ke)
+      gsap.fromTo("[data-target-capm]", 
+        { textContent: 0 }, 
+        { 
+          textContent: 15.87,
+          duration: 2.2,
+          ease: "power2.out",
+          snap: { textContent: 0.01 },
+          onUpdate: function() {
+            const val = parseFloat(this.targets()[0].textContent).toFixed(2).replace('.', ',');
+            this.targets()[0].innerHTML = `${val}%`;
+          }
+        }
+      );
+
+      // 3. Contador Valor do Equity
+      gsap.fromTo("[data-target-equity]", 
+        { textContent: 0 }, 
+        { 
+          textContent: 1.727,
+          duration: 2.6,
+          ease: "power3.out",
+          snap: { textContent: 0.001 },
+          onUpdate: function() {
+            const val = parseFloat(this.targets()[0].textContent).toFixed(3).replace('.', ',');
+            this.targets()[0].innerHTML = `R$ ${val} bi`;
+          }
+        }
+      );
+    }
+  });
+</script>
+</body>
+</html>
