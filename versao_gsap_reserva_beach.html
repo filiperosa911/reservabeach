@@ -181,6 +181,12 @@
     z-index: 2;
     will-change: opacity;
   }
+  .galacticos-intro-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    will-change: opacity, height, margin-bottom;
+  }
   .galacticos-header {
     position: relative;
     z-index: 3;
@@ -1226,13 +1232,16 @@
   <div class="slide-galacticos-overlay"></div>
 
   <div class="slide-inner">
-    <div class="galacticos-header">
-      <div class="slide-tag animate">Exclusividade Extrema</div>
-      <h2 class="slide-title animate delay-1" style="font-size: 44px; text-align: center;">Galacticos House<br><em>Vencer é para poucos.</em></h2>
-    </div>
+    <!-- Wrapper para colapsar altura no scroll -->
+    <div class="galacticos-intro-content">
+      <div class="galacticos-header">
+        <div class="slide-tag animate">Exclusividade Extrema</div>
+        <h2 class="slide-title animate delay-1" style="font-size: 44px; text-align: center;">Galacticos House<br><em>Vencer é para poucos.</em></h2>
+      </div>
 
-    <div class="galacticos-desc animate delay-2">
-      Um círculo privado ultra-exclusivo dentro do Reserva Beach Club, planejado nos moldes dos mais prestigiados <em>members clubs</em> internacionais.
+      <div class="galacticos-desc animate delay-2">
+        Um círculo privado ultra-exclusivo dentro do Reserva Beach Club, planejado nos moldes dos mais prestigiados <em>members clubs</em> internacionais.
+      </div>
     </div>
 
     <!-- Caixa de Imagens (5 renders sobrepostos da pasta local galaticos/) -->
@@ -2180,8 +2189,7 @@
       const captionTitle = slide.querySelector('.galacticos-caption-title');
       const captionDesc = slide.querySelector('.galacticos-caption-desc');
       const slideInner = slide.querySelector('.slide-inner');
-      const header = slide.querySelector('.galacticos-header');
-      const desc = slide.querySelector('.galacticos-desc');
+      const introContent = slide.querySelector('.galacticos-intro-content');
       const dimOverlay = slide.querySelector('.slide-galacticos-overlay');
       const partners = slide.querySelector('.galacticos-partners');
       const footer = slide.querySelector('.slide-footer');
@@ -2209,7 +2217,8 @@
 
       // --- FASE 1: Apagar as Luzes e Morphing da Caixa de Imagem para Widescreen (Scroll 0.0 -> 1.0) ---
       slide4Tl.to(dimOverlay, { opacity: 0.95, duration: 1.0 }, 0)
-              .to([header, desc, footer], { opacity: 0, y: -20, pointerEvents: "none", duration: 0.8 }, 0)
+              .to(introContent, { opacity: 0, height: 0, overflow: "hidden", pointerEvents: "none", duration: 1.0 }, 0)
+              .to(footer, { opacity: 0, duration: 0.8 }, 0)
               .to(".nav", { opacity: 0, pointerEvents: "none", duration: 0.8 }, 0) // Apaga o menu
               .to(slideInner, { maxWidth: "100%", width: "100%", padding: 0, duration: 1.0 }, 0)
               .to(".galacticos-img-box", { 
