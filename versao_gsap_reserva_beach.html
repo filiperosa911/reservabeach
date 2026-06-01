@@ -166,11 +166,25 @@
     padding-left: 24px;
   }
 
-  /* ── SLIDE 4 — GALACTICOS HOUSE (CARROSSEL SWIPER) ── */
+  /* ── SLIDE 4 — CINEMATIC GALACTICOS HOUSE ── */
   .slide-galacticos {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  .slide-galacticos-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: #03070d; /* Navy-black ultra escuro */
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+    will-change: opacity;
+  }
+  .galacticos-header {
+    position: relative;
+    z-index: 3;
+    will-change: opacity, transform;
   }
   .galacticos-desc {
     font-family: 'Cormorant Garamond', serif;
@@ -182,46 +196,88 @@
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+    z-index: 3;
+    will-change: opacity, transform;
   }
-  .swiper-container {
+  .galacticos-img-box {
+    position: relative;
+    z-index: 4;
     width: 100%;
-    padding: 20px 0 40px;
-    overflow: hidden;
-  }
-  .swiper-slide-custom {
-    width: 520px;
-    height: 340px;
+    height: 480px;
     border-radius: 6px;
     overflow: hidden;
     border: 1px solid rgba(201, 169, 110, 0.2);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-    background: var(--navy-mid);
-    position: relative;
-    cursor: none; /* Cursor customizado assume o controle */
+    box-shadow: 0 15px 45px rgba(0,0,0,0.55);
+    margin: 32px auto 0;
+    will-change: width, height, transform, border-radius;
   }
-  .swiper-slide-custom img {
+  .galacticos-img-box img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    will-change: opacity, transform;
   }
-  .slide-caption-overlay {
+  /* Elegante barra de legenda de vidro */
+  .galacticos-caption {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(0deg, rgba(13,27,42,0.95) 0%, rgba(13,27,42,0) 100%);
-    padding: 30px 24px 20px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(0deg, rgba(13,27,42,0.98) 0%, rgba(13,27,42,0.85) 70%, rgba(13,27,42,0) 100%);
+    padding: 28px 40px 24px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    z-index: 6;
   }
-  .slide-caption-title {
+  .galacticos-caption-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 80px;
+  }
+  .galacticos-caption-num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    color: var(--white-pure);
-  }
-  .slide-caption-num {
-    font-size: 11px;
+    font-size: 24px;
     color: var(--sand);
-    letter-spacing: 2px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .galacticos-caption-line {
+    width: 32px;
+    height: 2px;
+    background: var(--sand);
+  }
+  .galacticos-caption-body {
+    flex: 1;
+    margin-left: 40px;
+  }
+  .galacticos-caption-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--white-pure);
+    margin-bottom: 4px;
+  }
+  .galacticos-caption-desc {
+    font-size: 12px;
+    color: var(--gray-light);
+    line-height: 1.5;
+  }
+  .galacticos-partners {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    margin-top: 32px;
+    opacity: 0.65;
+    will-change: opacity, transform;
   }
   .galacticos-architects {
     display: flex;
@@ -1165,78 +1221,50 @@
 <!-- ══════════════════════════════════════════════ -->
 <div class="section-divider"><span>Galacticos House</span></div>
 
-<section class="slide slide-galacticos">
+<section class="slide slide-galacticos" style="position: relative;">
+  <!-- Overlay para apagar as luzes -->
+  <div class="slide-galacticos-overlay"></div>
+
   <div class="slide-inner">
     <div class="galacticos-header">
       <div class="slide-tag animate">Exclusividade Extrema</div>
-      <h2 class="slide-title animate delay-1" style="font-size: 44px;">Galacticos House<br><em>Vencer é para poucos.</em></h2>
+      <h2 class="slide-title animate delay-1" style="font-size: 44px; text-align: center;">Galacticos House<br><em>Vencer é para poucos.</em></h2>
     </div>
 
     <div class="galacticos-desc animate delay-2">
       Um círculo privado ultra-exclusivo dentro do Reserva Beach Club, planejado nos moldes dos mais prestigiados <em>members clubs</em> internacionais.
     </div>
 
-    <!-- Swiper Carousel das Renders -->
-    <div class="swiper-container-wrap animate delay-3">
-      <!-- Tag customizada que segue o mouse -->
-      <div id="custom-cursor" class="drag-tag"><span>DRAG</span></div>
+    <!-- Caixa de Imagens (5 renders sobrepostos da pasta local galaticos/) -->
+    <div class="galacticos-img-box animate delay-3">
+      <img src="galaticos/slide_introducao.webp" alt="Galacticos House" class="slide-img" style="z-index: 5;">
+      <img src="galaticos/slide1.webp" alt="Complexo de Tênis" class="slide-img" style="z-index: 4; opacity: 0;">
+      <img src="galaticos/slide20.webp" alt="Living Privado" class="slide-img" style="z-index: 3; opacity: 0;">
+      <img src="galaticos/slide29.webp" alt="Wellness Center" class="slide-img" style="z-index: 2; opacity: 0;">
+      <img src="galaticos/slide37.webp" alt="Arquitetura Perez & Abbud" class="slide-img" style="z-index: 1; opacity: 0;">
       
-      <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide swiper-slide-custom">
-            <img src="https://reservaclub.com.br/gh/banner-hero.webp" alt="Galacticos House Conceito">
-            <div class="slide-caption-overlay">
-              <div class="slide-caption-title">Galacticos House Club</div>
-              <div class="slide-caption-num">01 / 06</div>
-            </div>
-          </div>
-          <div class="swiper-slide swiper-slide-custom">
-            <img src="https://reservaclub.com.br/images/project/RBC_38_Restaurantes_3_EF.jpg" alt="Restaurantes Reserva Club">
-            <div class="slide-caption-overlay">
-              <div class="slide-caption-title">Alta Gastronomia Club</div>
-              <div class="slide-caption-num">02 / 06</div>
-            </div>
-          </div>
-          <div class="swiper-slide swiper-slide-custom">
-            <img src="https://reservaclub.com.br/gh/slide1.webp" alt="Complexo de Tênis">
-            <div class="slide-caption-overlay">
-              <div class="slide-caption-title">Quadras de Saibro Premium</div>
-              <div class="slide-caption-num">03 / 06</div>
-            </div>
-          </div>
-          <div class="swiper-slide swiper-slide-custom">
-            <img src="https://reservaclub.com.br/gh/slide2.webp" alt="Área Gourmet">
-            <div class="slide-caption-overlay">
-              <div class="slide-caption-title">Área de Convivência Privada</div>
-              <div class="slide-caption-num">04 / 06</div>
-            </div>
-          </div>
-          <div class="swiper-slide swiper-slide-custom">
-            <img src="https://reservaclub.com.br/gh/slide3.webp" alt="Fisioterapia e Recuperação">
-            <div class="slide-caption-overlay">
-              <div class="slide-caption-title">Espaço Wellness & Rehab</div>
-              <div class="slide-caption-num">05 / 06</div>
-            </div>
-          </div>
-          <div class="swiper-slide swiper-slide-custom">
-            <img src="https://reservaclub.com.br/gh/slide_introducao.webp" alt="Galacticos House Lazer">
-            <div class="slide-caption-overlay">
-              <div class="slide-caption-title">Victoribus, Gloria</div>
-              <div class="slide-caption-num">06 / 06</div>
-            </div>
-          </div>
+      <!-- Barra de Vidro (Legenda Dinâmica) -->
+      <div class="galacticos-caption">
+        <div class="galacticos-caption-meta">
+          <div class="galacticos-caption-num">01 / 05</div>
+          <div class="galacticos-caption-line"></div>
+        </div>
+        <div class="galacticos-caption-body">
+          <div class="galacticos-caption-title">Galacticos Members Club</div>
+          <div class="galacticos-caption-desc">Um círculo ultra-exclusivo nos moldes dos mais prestigiados clubes privados internacionais.</div>
         </div>
       </div>
     </div>
 
-    <!-- Grifes e Parcerias de Projeto -->
+    <!-- Grifes e Parcerias de Projeto (Entrarão em fade-in no final da rolagem) -->
     <div class="galacticos-partners animate delay-4">
       <img src="https://reservaclub.com.br/logo-benedito.svg" alt="Benedito Abbud" class="architect-logo">
       <img src="https://reservaclub.com.br/logo-leonice.svg" alt="Leonice Alves" class="architect-logo">
       <img src="https://reservaclub.com.br/logo-rogerio-perez.svg" alt="Rogério Perez" class="architect-logo">
     </div>
   </div>
-  <div class="slide-footer">
+
+  <div class="slide-footer" style="position: relative; z-index: 1;">
     <div class="strivo">Strivo Gestão de Recursos</div>
     <div class="pg">04</div>
     <div class="conf">Confidencial</div>
@@ -2144,61 +2172,127 @@
         }
       );
     }
-  });
 
-  // ── 5. CARROSSEL SWIPER & CURSOR PERSONALIZADO (SLIDE 4) ──
-  const swiper = new Swiper('.mySwiper', {
-    slidesPerView: 'auto',
-    centeredSlides: true,
-    spaceBetween: 30,
-    grabCursor: false,
-    speed: 800,
-    loop: true,
-    keyboard: {
-      enabled: true,
-    },
-  });
+    // Animação Cinematográfica Avançada do Slide 4 (Galacticos House)
+    if (index === 3) {
+      const images = slide.querySelectorAll('.galacticos-img-box img.slide-img');
+      const captionNum = slide.querySelector('.galacticos-caption-num');
+      const captionTitle = slide.querySelector('.galacticos-caption-title');
+      const captionDesc = slide.querySelector('.galacticos-caption-desc');
+      const slideInner = slide.querySelector('.slide-inner');
+      const header = slide.querySelector('.galacticos-header');
+      const desc = slide.querySelector('.galacticos-desc');
+      const dimOverlay = slide.querySelector('.slide-galacticos-overlay');
+      const partners = slide.querySelector('.galacticos-partners');
+      const footer = slide.querySelector('.slide-footer');
 
-  // Configurações do Cursor customizado que persegue o mouse
-  const dragTag = document.getElementById('custom-cursor');
-  const swiperWrap = document.querySelector('.swiper-container-wrap');
+      // Configuração inicial de opacidade para os parceiros arquitetônicos
+      gsap.set(partners, { opacity: 0, y: 15 });
 
-  let mouseX = 0, mouseY = 0;
-  let tagX = 0, tagY = 0;
+      const slide4Tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: slide,
+          start: "top top",
+          end: "+=450%", // Espaço para morphing + 5 trocas
+          scrub: true,
+          pin: true,
+          anticipatePin: 1
+        }
+      });
 
-  window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
+      // Zoom lento contínuo em todas as renders durante a rolagem
+      slide4Tl.fromTo(images, 
+        { scale: 1.15 }, 
+        { scale: 1.0, ease: "none", duration: 5.0 }, 
+        0
+      );
 
-  // Animação elástica do drag-tag perseguindo as coordenadas x/y do mouse
-  gsap.ticker.add(() => {
-    const dt = 1.0 - Math.pow(1.0 - 0.15, gsap.ticker.deltaRatio());
-    tagX += (mouseX - tagX) * dt;
-    tagY += (mouseY - tagY) * dt;
+      // --- FASE 1: Apagar as Luzes e Morphing da Caixa de Imagem para Widescreen (Scroll 0.0 -> 1.0) ---
+      slide4Tl.to(dimOverlay, { opacity: 0.95, duration: 1.0 }, 0)
+              .to([header, desc, footer], { opacity: 0, y: -20, pointerEvents: "none", duration: 0.8 }, 0)
+              .to(".nav", { opacity: 0, pointerEvents: "none", duration: 0.8 }, 0) // Apaga o menu
+              .to(slideInner, { maxWidth: "100%", width: "100%", padding: 0, duration: 1.0 }, 0)
+              .to(".galacticos-img-box", { 
+                width: "80vw", 
+                height: "65vh", 
+                borderRadius: "12px", 
+                border: "1px solid rgba(201, 169, 110, 0.35)",
+                boxShadow: "0 25px 60px rgba(0,0,0,0.85)",
+                margin: "0 auto",
+                duration: 1.0 
+              }, 0);
 
-    gsap.set(dragTag, {
-      x: tagX - 36,
-      y: tagY - 36
-    });
-  });
+      // --- FASE 2: Transição da Imagem 1 para a Imagem 2 (Scroll 1.0 -> 2.0) ---
+      slide4Tl.to(images[0], { opacity: 0, duration: 1.0 }, 1.0)
+              .to(images[1], { opacity: 1, duration: 1.0 }, 1.0)
+              .to(captionTitle, {
+                duration: 0.1,
+                onStart: () => {
+                  captionNum.innerHTML = "02 / 05";
+                  captionTitle.innerHTML = "Complexo de Tênis Premium";
+                  captionDesc.innerHTML = "Quadras de saibro cobertas construídas nos padrões das competições mais exigentes do circuito mundial.";
+                },
+                onReverseComplete: () => {
+                  captionNum.innerHTML = "01 / 05";
+                  captionTitle.innerHTML = "Galacticos Members Club";
+                  captionDesc.innerHTML = "Um círculo ultra-exclusivo nos moldes dos mais prestigiados clubes privados internacionais.";
+                }
+              }, 1.4);
 
-  swiperWrap.addEventListener('mouseenter', () => {
-    gsap.to(dragTag, { scale: 1, duration: 0.3, ease: "power2.out" });
-  });
+      // --- FASE 3: Transição da Imagem 2 para a Imagem 3 (Scroll 2.0 -> 3.0) ---
+      slide4Tl.to(images[1], { opacity: 0, duration: 1.0 }, 2.0)
+              .to(images[2], { opacity: 1, duration: 1.0 }, 2.0)
+              .to(captionTitle, {
+                duration: 0.1,
+                onStart: () => {
+                  captionNum.innerHTML = "03 / 05";
+                  captionTitle.innerHTML = "Living & Private Lounge";
+                  captionDesc.innerHTML = "Espaços sociais sofisticados e privativos ideais para reuniões de negócios, encontros e convívio reservado.";
+                },
+                onReverseComplete: () => {
+                  captionNum.innerHTML = "02 / 05";
+                  captionTitle.innerHTML = "Complexo de Tênis Premium";
+                  captionDesc.innerHTML = "Quadras de saibro cobertas construídas nos padrões das competições mais exigentes do circuito mundial.";
+                }
+              }, 2.4);
 
-  swiperWrap.addEventListener('mouseleave', () => {
-    gsap.to(dragTag, { scale: 0, duration: 0.3, ease: "power2.out" });
-  });
+      // --- FASE 4: Transição da Imagem 3 para a Imagem 4 (Scroll 3.0 -> 4.0) ---
+      slide4Tl.to(images[2], { opacity: 0, duration: 1.0 }, 3.0)
+              .to(images[3], { opacity: 1, duration: 1.0 }, 3.0)
+              .to(captionTitle, {
+                duration: 0.1,
+                onStart: () => {
+                  captionNum.innerHTML = "04 / 05";
+                  captionTitle.innerHTML = "Spa, Wellness & Rehab";
+                  captionDesc.innerHTML = "Uma infraestrutura de recuperação e bem-estar de alto padrão para cuidar do corpo e da mente pós-treino.";
+                },
+                onReverseComplete: () => {
+                  captionNum.innerHTML = "03 / 05";
+                  captionTitle.innerHTML = "Living & Private Lounge";
+                  captionDesc.innerHTML = "Espaços sociais sofisticados e privativos ideais para reuniões de negócios, encontros e convívio reservado.";
+                }
+              }, 3.4);
 
-  // Facilita avançar os slides com cliques nas metades esquerda/direita do carrossel
-  swiperWrap.addEventListener('click', (e) => {
-    if (!e.target.closest('a') && !e.target.closest('button')) {
-      if (e.clientX < window.innerWidth / 2) {
-        swiper.slidePrev();
-      } else {
-        swiper.slideNext();
-      }
+      // --- FASE 5: Transição da Imagem 4 para a Imagem 5 + Entrada de Logos (Scroll 4.0 -> 5.0) ---
+      slide4Tl.to(images[3], { opacity: 0, duration: 1.0 }, 4.0)
+              .to(images[4], { opacity: 1, duration: 1.0 }, 4.0)
+              .to(captionTitle, {
+                duration: 0.1,
+                onStart: () => {
+                  captionNum.innerHTML = "05 / 05";
+                  captionTitle.innerHTML = "Victoribus Gloria · Arquitetura";
+                  captionDesc.innerHTML = "Assinatura de grifes consagradas como Benedito Abbud, Leonice Alves e Rogério Perez garantem prestígio e valorização.";
+                },
+                onReverseComplete: () => {
+                  captionNum.innerHTML = "04 / 05";
+                  captionTitle.innerHTML = "Spa, Wellness & Rehab";
+                  captionDesc.innerHTML = "Uma infraestrutura de recuperação e bem-estar de alto padrão para cuidar do corpo e da mente pós-treino.";
+                }
+              }, 4.4)
+              .to(partners, { opacity: 0.85, y: 0, duration: 1.0 }, 4.0); // Logos de marcas surgem sob o cinema
+
+      // --- FASE 6: Reaparecer o Menu Superior no Final do Slide 4 ---
+      slide4Tl.to(".nav", { opacity: 1, pointerEvents: "auto", duration: 0.8 }, 4.2);
     }
   });
 
