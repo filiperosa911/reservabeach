@@ -303,6 +303,92 @@
     opacity: 1;
   }
 
+  /* ── SLIDE 5 — INTRODUÇÃO TESE COMERCIAL ── */
+  .slide-tese-intro {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: #03070d;
+  }
+  .tese-spotlight {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(201, 169, 110, 0.12) 0%, rgba(201, 169, 110, 0.03) 40%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .tese-intro-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px !important;
+  }
+  .tese-intro-reveal-wrapper {
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+  .tese-intro-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 96px;
+    font-weight: 300;
+    letter-spacing: 12px;
+    line-height: 1.1;
+    color: var(--white-pure);
+    margin: 0;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+  }
+  .tese-intro-title .word-1 {
+    font-weight: 300;
+  }
+  .tese-intro-title .word-2 em {
+    font-style: italic;
+    color: var(--sand);
+    font-weight: 400;
+  }
+  .tese-intro-line {
+    width: 0%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--sand) 50%, transparent);
+    opacity: 0.5;
+    will-change: width;
+  }
+  .tese-intro-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: var(--gray-light);
+    max-width: 600px;
+    margin-top: 24px;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(15px);
+    will-change: transform, opacity;
+  }
+
   /* ── GLOBAL STYLE OVERRIDES FOR GSAP ── */
   .slide .slide-inner {
     opacity: 1; /* control entries purely via GSAP */
@@ -1081,6 +1167,7 @@
     <div class="nav-dot" title="O Empreendimento"></div>
     <div class="nav-dot" title="Parceria & Legado"></div>
     <div class="nav-dot" title="Galacticos House"></div>
+    <div class="nav-dot" title="Tese Comercial (Intro)"></div>
     <div class="nav-dot" title="Tese Comercial"></div>
     <div class="nav-dot" title="Estrutura de Fundos"></div>
     <div class="nav-dot" title="Premissas & Vendas"></div>
@@ -1281,7 +1368,33 @@
 </section>
 
 <!-- ══════════════════════════════════════════════ -->
-<!-- SLIDE 3 — TÍTULOS E VALORIZAÇÃO -->
+<!-- SLIDE 5 — INTRODUÇÃO: TESE COMERCIAL (NOVO) -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="slide slide-tese-intro" style="position: relative;">
+  <!-- Spotlight radial -->
+  <div class="tese-spotlight"></div>
+  
+  <div class="slide-inner tese-intro-inner">
+    <div class="tese-intro-reveal-wrapper">
+      <div class="tese-intro-line"></div>
+      <h1 class="tese-intro-title">
+        <span class="word-1">TESE</span> 
+        <span class="word-2"><em>Comercial</em></span>
+      </h1>
+      <div class="tese-intro-line"></div>
+    </div>
+    <p class="tese-intro-subtitle">A solidez patrimonial de um ativo único aliada a um modelo de negócios de alta escalabilidade.</p>
+  </div>
+  
+  <div class="slide-footer" style="position: relative; z-index: 1;">
+    <div class="strivo">Strivo Gestão de Recursos</div>
+    <div class="pg">05</div>
+    <div class="conf">Confidencial</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SLIDE 6 — TÍTULOS E VALORIZAÇÃO -->
 <!-- ══════════════════════════════════════════════ -->
 <div class="section-divider"><span>Tese Comercial</span></div>
 
@@ -1407,7 +1520,7 @@
   </div>
   <div class="slide-footer">
     <div class="strivo">Strivo Gestão de Recursos</div>
-    <div class="pg">05</div>
+    <div class="pg">06</div>
     <div class="conf">Confidencial</div>
   </div>
 </section>
@@ -1483,7 +1596,7 @@
   </div>
   <div class="slide-footer">
     <div class="strivo">Strivo Gestão de Recursos</div>
-    <div class="pg">06</div>
+    <div class="pg">07</div>
     <div class="conf">Confidencial</div>
   </div>
 </section>
@@ -1629,7 +1742,7 @@
   </div>
   <div class="slide-footer">
     <div class="strivo">Strivo Gestão de Recursos</div>
-    <div class="pg">07</div>
+    <div class="pg">08</div>
     <div class="conf">Confidencial</div>
   </div>
 </section>
@@ -1749,7 +1862,7 @@
   </div>
   <div class="slide-footer">
     <div class="strivo">Strivo Gestão de Recursos</div>
-    <div class="pg">08</div>
+    <div class="pg">09</div>
     <div class="conf">Confidencial</div>
   </div>
 </section>
@@ -1810,7 +1923,7 @@
   </div>
   <div class="slide-footer">
     <div class="strivo">Strivo Gestão de Recursos</div>
-    <div class="pg">09</div>
+    <div class="pg">10</div>
     <div class="conf">Confidencial</div>
   </div>
 </section>
@@ -1916,7 +2029,7 @@
   </div>
   <div class="slide-footer">
     <div class="strivo">Strivo Gestão de Recursos</div>
-    <div class="pg">10</div>
+    <div class="pg">11</div>
     <div class="conf">Confidencial</div>
   </div>
 </section>
@@ -2302,6 +2415,38 @@
 
       // --- FASE 6: Reaparecer o Menu Superior no Final do Slide 4 ---
       slide4Tl.to(".nav", { opacity: 1, pointerEvents: "auto", duration: 0.8 }, 4.2);
+    }
+
+    // Animação Cinematográfica do Slide 5 (Introdução: Tese Comercial)
+    if (index === 4) {
+      const title = slide.querySelector('.tese-intro-title');
+      const lines = slide.querySelectorAll('.tese-intro-line');
+      const subtitle = slide.querySelector('.tese-intro-subtitle');
+      const spotlight = slide.querySelector('.tese-spotlight');
+
+      const teseIntroTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: slide,
+          start: "top top",
+          end: "+=160%",
+          scrub: true,
+          pin: true,
+          anticipatePin: 1
+        }
+      });
+
+      // Animando o apagar das luzes (spotlight radial)
+      teseIntroTl.to(spotlight, { opacity: 1, scale: 1.1, duration: 1.2 })
+                 // Desenhando as linhas horizontais douradas
+                 .to(lines, { width: "100%", duration: 1.0 }, "-=0.6")
+                 // Revelando o título com glow dourado
+                 .fromTo(title,
+                   { scale: 0.85, filter: "drop-shadow(0 0 0px rgba(201, 169, 110, 0))" },
+                   { scale: 1.0, filter: "drop-shadow(0 0 25px rgba(201, 169, 110, 0.45))", duration: 1.2, ease: "power2.out" },
+                   "-=0.9"
+                 )
+                 // Revelando o subtítulo explicativo de alto impacto
+                 .to(subtitle, { opacity: 1, y: 0, duration: 0.8 }, "-=0.4");
     }
   });
 
