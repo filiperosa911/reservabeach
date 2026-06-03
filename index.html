@@ -1824,7 +1824,7 @@
 
   <section class="slide">
     <div class="slide-inner slide-grid-ronaldo">
-      <div class="ronaldo-img-container animate">
+      <div class="ronaldo-img-container">
         <img src="https://reservaclub.com.br/images/ronaldo-desktop.jpg"
           alt="Ronaldo Nazário - Embaixador Reserva Beach Club">
       </div>
@@ -2958,17 +2958,35 @@
         slide2Tl.to(".nav", { opacity: 1, pointerEvents: "auto", duration: 0.8 }, 3.2);
       }
 
-      // Clip-path Slide 3 (Ronaldo)
+      // Animação Suave Slide 3 (Ronaldo)
       const slide3 = slides[2];
       if (slide3) {
-        gsap.fromTo(slide3.querySelector(".ronaldo-img-container"),
-          { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" },
+        const container = slide3.querySelector(".ronaldo-img-container");
+        const img = container.querySelector("img");
+        
+        gsap.fromTo(container,
+          { opacity: 0, y: 50 },
           {
-            clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0 100%)",
+            opacity: 1,
+            y: 0,
             duration: 1.6,
-            ease: "power4.inOut",
+            ease: "power3.out",
             scrollTrigger: {
-              trigger: slide3.querySelector(".ronaldo-img-container"),
+              trigger: container,
+              start: "top 80%"
+            }
+          }
+        );
+
+        gsap.fromTo(img,
+          { scale: 1.2, filter: "brightness(0.6)" },
+          {
+            scale: 1.0,
+            filter: "brightness(1.0)",
+            duration: 2.0,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: container,
               start: "top 80%"
             }
           }
