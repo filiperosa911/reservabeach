@@ -2099,41 +2099,63 @@
       <p class="slide-lead animate delay-2">A reestruturação dos Fundos Avignon isola o ativo Reserva Beach em um FII
         próprio, viabilizando a oferta primária via FIC coordenada pela XP Investimentos.</p>
 
-      <div class="flow animate delay-3">
-        <div class="flow-item">
-          <div class="flow-item-tag">Origem</div>
-          <div class="flow-item-name">FIM Avignon</div>
-          <div class="flow-item-desc">Fundo Multimercado · fundo investidor origem</div>
+      <!-- Estrutura em 3 colunas de fases societárias, sem scrollbar horizontal -->
+      <div class="grid-3 animate delay-3" style="margin-top: 40px; gap: 32px;">
+        <!-- Fase 1 -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--sand); font-weight: 500; border-bottom: 1px solid rgba(201, 169, 110, 0.2); padding-bottom: 8px;">Fase 1 · Reestruturação</div>
+          
+          <div class="flow-item" style="text-align: left; width: 100%; min-width: 0; padding: 20px;">
+            <div class="flow-item-tag">Origem</div>
+            <div class="flow-item-name">FIM Avignon</div>
+            <div class="flow-item-desc">Fundo Multimercado · fundo investidor origem</div>
+          </div>
+          
+          <div style="text-align: center; color: var(--sand); opacity: 0.6; font-size: 18px; line-height: 1;">↓</div>
+          
+          <div class="flow-item" style="text-align: left; width: 100%; min-width: 0; padding: 20px;">
+            <div class="flow-item-tag">Etapa 1</div>
+            <div class="flow-item-name">FIP Avignon</div>
+            <div class="flow-item-desc">Fundo Participações · detém 18 terrenos · realiza cisão</div>
+          </div>
         </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-item">
-          <div class="flow-item-tag">Etapa 1</div>
-          <div class="flow-item-name">FIP Avignon</div>
-          <div class="flow-item-desc">Fundo Participações · detém 18 terrenos · realiza cisão</div>
+
+        <!-- Fase 2 -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--sand); font-weight: 500; border-bottom: 1px solid rgba(201, 169, 110, 0.2); padding-bottom: 8px;">Fase 2 · Ativos & Obra</div>
+          
+          <div class="flow-item" style="text-align: left; width: 100%; min-width: 0; padding: 20px;">
+            <div class="flow-item-tag">Etapa 2 · SPE</div>
+            <div class="flow-item-name">SPE Reserva Beach</div>
+            <div class="flow-item-desc">Detém matrícula + contrato de construção</div>
+          </div>
+          
+          <div style="text-align: center; color: var(--sand); opacity: 0.6; font-size: 18px; line-height: 1;">↓</div>
+          
+          <div class="flow-item highlight" style="text-align: left; width: 100%; min-width: 0; padding: 20px;">
+            <div class="flow-item-tag">Etapa 3 · FII Base</div>
+            <div class="flow-item-name">FII Reserva Beach</div>
+            <div class="flow-item-desc">Onde a obra acontece · desenvolvimento do empreendimento</div>
+          </div>
         </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-item">
-          <div class="flow-item-tag">Etapa 2 · SPE</div>
-          <div class="flow-item-name">SPE Reserva Beach</div>
-          <div class="flow-item-desc">Detém matrícula + contrato de construção</div>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-item highlight">
-          <div class="flow-item-tag">Etapa 3 · FII Base</div>
-          <div class="flow-item-name">FII Reserva Beach</div>
-          <div class="flow-item-desc">Onde a obra acontece · desenvolvimento do empreendimento</div>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-item final">
-          <div class="flow-item-tag">Oferta · FIC</div>
-          <div class="flow-item-name">FIC FII RB Yield</div>
-          <div class="flow-item-desc">Compra 100% das cotas do FII · capta via XP</div>
-        </div>
-        <div class="flow-arrow">←</div>
-        <div class="flow-item" style="background:rgba(43,134,171,0.08);border-color:rgba(43,134,171,0.4);">
-          <div class="flow-item-tag">Distribuição</div>
-          <div class="flow-item-name">XP Investimentos</div>
-          <div class="flow-item-desc">Coordenadora Líder · Oferta Primária · Mercado</div>
+
+        <!-- Fase 3 -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--sand); font-weight: 500; border-bottom: 1px solid rgba(201, 169, 110, 0.2); padding-bottom: 8px;">Fase 3 · Oferta & Mercado</div>
+          
+          <div class="flow-item final" style="text-align: left; width: 100%; min-width: 0; padding: 20px;">
+            <div class="flow-item-tag">Oferta · FIC</div>
+            <div class="flow-item-name">FIC FII RB Yield</div>
+            <div class="flow-item-desc">Compra 100% das cotas do FII · capta via XP</div>
+          </div>
+          
+          <div style="text-align: center; color: var(--sand); opacity: 0.6; font-size: 18px; line-height: 1;">↑</div>
+          
+          <div class="flow-item" style="text-align: left; width: 100%; min-width: 0; padding: 20px; background: rgba(43, 134, 171, 0.08); border-color: rgba(43, 134, 171, 0.4);">
+            <div class="flow-item-tag">Distribuição</div>
+            <div class="flow-item-name">XP Investimentos</div>
+            <div class="flow-item-desc">Coordenadora Líder · Oferta Primária · Mercado</div>
+          </div>
         </div>
       </div>
 
