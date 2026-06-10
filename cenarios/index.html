@@ -377,6 +377,21 @@
       font-weight: 600;
     }
 
+    .scen-tag-static {
+      margin-left: auto;
+      color: var(--gold-2);
+      font-weight: 500;
+      font-family: 'Fraunces', serif;
+      font-size: 13px;
+      font-style: italic;
+      border: 1px solid rgba(232, 192, 116, 0.25);
+      padding: 5px 14px;
+      border-radius: 100px;
+      background: rgba(232, 192, 116, 0.06);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
     section.block {
       padding: 120px 0;
       position: relative;
@@ -914,6 +929,28 @@
         margin-left: 0;
       }
 
+      .scen-tag-static {
+        margin-left: 0;
+        margin-top: 8px;
+        width: fit-content;
+        white-space: normal;
+      }
+
+      .switch-inner {
+        gap: 12px;
+      }
+
+      .tabs {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .tabs::-webkit-scrollbar {
+        display: none;
+      }
+
       .hero-stats {
         gap: 28px;
       }
@@ -1135,7 +1172,7 @@
         <button class="tab" data-scen="Otimista"><span class="dot"></span>Otimista</button>
         <button class="tab" data-scen="Acelerado"><span class="dot"></span>Acelerado</button>
       </div>
-      <div style="margin-left: auto; color: var(--gold-2); font-weight: 500; font-family: 'Fraunces', serif; font-size: 13px; font-style: italic; border: 1px solid rgba(232, 192, 116, 0.25); padding: 5px 14px; border-radius: 100px; background: rgba(232, 192, 116, 0.06); letter-spacing: 0.02em;">
+      <div class="scen-tag-static">
         Cenário sem cálculo de perpetuidade
       </div>
     </div>
